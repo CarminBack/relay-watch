@@ -16,6 +16,9 @@ export interface RelayRecord {
   sampleSize: number | null
   tags: string[]
   evidence: string[]
+  visibility?: 'draft' | 'published'
+  createdAt?: string
+  modifiedAt?: string
 }
 
 // Publish only records backed by reproducible evidence. Never use this list for unverified accusations.

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && tsc -p tsconfig.worker.json && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test:e2e": "playwright test"
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@cloudflare/workers-types": "^5.20260810.1",
     "@playwright/test": "^1.62.1",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",

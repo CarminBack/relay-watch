@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -119,19 +119,29 @@ function RecordCard({ record }: { record: RelayRecord }) {
 function App() {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState<Filter>('all')
+  const [records, setRecords] = useState<RelayRecord[]>(relayRecords)
 
-  const publicRecords = relayRecords.filter((record) => record.status !== 'demo')
+  useEffect(() => {
+    let active = true
+    fetch('/api/records', { headers: { Accept: 'application/json' } })
+      .then((response) => response.ok ? response.json() as Promise<{ records: RelayRecord[] }> : Promise.reject(new Error('API unavailable')))
+      .then((payload) => { if (active && Array.isArray(payload.records)) setRecords(payload.records) })
+      .catch(() => undefined)
+    return () => { active = false }
+  }, [])
+
+  const publicRecords = records.filter((record) => record.status !== 'demo')
   const confirmedCount = publicRecords.filter((record) => record.status === 'confirmed').length
   const clearedCount = publicRecords.filter((record) => record.status === 'cleared').length
 
   const visibleRecords = useMemo(() => {
     const normalized = query.trim().toLowerCase()
-    return relayRecords.filter((record) => {
+    return records.filter((record) => {
       const matchesFilter = filter === 'all' || record.status === filter
       const haystack = [record.name, record.domain, record.telegramHandle, ...record.tags].join(' ').toLowerCase()
       return matchesFilter && (!normalized || haystack.includes(normalized))
     })
-  }, [filter, query])
+  }, [filter, query, records])
 
   return (
     <div className="app-shell">
@@ -222,7 +232,7 @@ function App() {
 
           <div className="result-meta" aria-live="polite">
             <span>当前显示 <strong>{visibleRecords.length}</strong> 条</span>
-            <span>最后更新：2026-08-10</span>
+            <span>数据源：Cloudflare D1</span>
           </div>
 
           <div className="record-list">
