@@ -28,4 +28,4 @@ npm run build
 npx wrangler deploy
 ```
 
-线上域名：`https://verify.mewinyou.shop`
+线上域名：`https://mewinyou.us.ci`
