@@ -1,0 +1,25 @@
+name: 申请更正
+description: 对已公开记录提交反证或更正请求
+title: "[更正] "
+labels: ["更正"]
+body:
+  - type: input
+    id: record
+    attributes:
+      label: 相关记录
+      description: 填写站点名称或记录链接。
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: 需要更正的内容
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 反证或补充材料
+      description: 请提供可公开复核的材料，敏感信息务必脱敏。
+    validations:
+      required: true

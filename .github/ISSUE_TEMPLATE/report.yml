@@ -1,0 +1,49 @@
+name: 提交核验线索
+description: 提交一个需要核验的中转站及公开证据
+title: "[线索] "
+labels: ["线索", "待核验"]
+body:
+  - type: markdown
+    attributes:
+      value: 请勿提交密码、API Key、订单隐私或未经脱敏的个人信息。线索不等于结论。
+  - type: input
+    id: name
+    attributes:
+      label: 站点名称
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: 网站地址
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: input
+    id: telegram
+    attributes:
+      label: Telegram 频道
+      placeholder: https://t.me/example
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: 站点公开承诺
+      description: 请附可定位的页面、公告或截图日期。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 可复核证据
+      description: 说明测试方法、样本量、时间和原始材料链接。
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已移除 API Key、订单号、个人账号等敏感信息。
+          required: true
