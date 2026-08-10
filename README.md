@@ -11,7 +11,7 @@ npm run dev
 
 ## 管理后台
 
-管理员入口：`https://mewinyou.us.ci/admin`。后台由 Cloudflare Access 保护，记录存储在 Cloudflare D1；保存后公开页会直接读取最新数据，无需重新部署。新账号完成 Zone 转移和 Access 启用后，登录白名单邮箱即可使用。
+管理员入口：`https://gptcheck.ccwu.cc/admin`。后台由 Cloudflare Access 保护，记录存储在 Cloudflare D1；保存后公开页会直接读取最新数据，无需重新部署。登录白名单邮箱即可使用。
 
 后台支持草稿、发布、编辑和删除。正式发布非演示记录时至少填写一项可复核证据。
 
@@ -35,4 +35,4 @@ npx wrangler d1 migrations apply relay-watch --remote
 npx wrangler deploy
 ```
 
-线上域名：`https://mewinyou.us.ci`
+线上域名：`https://gptcheck.ccwu.cc`
